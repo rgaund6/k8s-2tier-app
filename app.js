@@ -4,6 +4,10 @@ const session = require("express-session");
 const bcrypt = require("bcryptjs");
 
 const app = express();
+
+// 🔥 CI/CD Version Indicator
+const APP_VERSION = "Version 2 - CI/CD Working 🚀";
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -47,9 +51,13 @@ body {
     box-shadow:0 10px 25px rgba(0,0,0,0.2);
     width:320px;
     text-align:center;
-    animation: fadeIn 0.6s ease-in-out;
 }
-h2 { margin-bottom:20px; }
+h2 { margin-bottom:10px; }
+.version {
+    font-size:13px;
+    color:gray;
+    margin-bottom:20px;
+}
 input {
     width:100%;
     padding:10px;
@@ -69,17 +77,12 @@ button {
 }
 button:hover {
     background:#5a67d8;
-    transform:scale(1.05);
 }
 a {
     display:block;
     margin-top:10px;
     text-decoration:none;
     color:#667eea;
-}
-@keyframes fadeIn {
-    from { opacity:0; transform:translateY(20px); }
-    to { opacity:1; transform:translateY(0); }
 }
 </style>
 `;
@@ -92,6 +95,7 @@ app.get("/signup", (req, res) => {
     <body>
         <div class="card">
             <h2>Signup</h2>
+            <div class="version">${APP_VERSION}</div>
             <form method="POST">
                 <input name="username" placeholder="Username" required/>
                 <input name="password" type="password" placeholder="Password" required/>
@@ -115,6 +119,7 @@ app.get("/login", (req, res) => {
     <body>
         <div class="card">
             <h2>Login</h2>
+            <div class="version">${APP_VERSION}</div>
             <form method="POST">
                 <input name="username" placeholder="Username" required/>
                 <input name="password" type="password" placeholder="Password" required/>
@@ -144,6 +149,7 @@ app.get("/dashboard", isAuth, (req, res) => {
         <div class="card">
             <h2>Welcome ${req.session.user.username}</h2>
             <p>You are successfully logged in 🎉</p>
+            <div class="version">${APP_VERSION}</div>
             <a href="/logout"><button>Logout</button></a>
         </div>
     </body></html>
@@ -155,4 +161,4 @@ app.get("/logout", (req, res) => {
     res.redirect("/login");
 });
 
-app.listen(3000, () => console.log("Server started"));
+app.listen(3000, () => console.log(`Server started - ${APP_VERSION}`));
