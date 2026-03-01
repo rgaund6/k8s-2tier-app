@@ -6,8 +6,7 @@ const bcrypt = require("bcryptjs");
 const app = express();
 
 // 🔥 CI/CD Version Indicator
-const APP_VERSION = "Version 2 - CI/CD Working 🚀";
-
+const APP_VERSION = "Version 3 – FINAL TEST 🔥🔥🔥";
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
